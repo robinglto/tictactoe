@@ -11,7 +11,7 @@ function Square({ value, onSquareClick }: any) {
   return (
     <div>
       <button
-        className="bg-white rounded-lg text-black py-1 px-2 m-0.5 w-12 h-12"
+        className="bg-white rounded-lg text-6xl text-black py-1 px-2 m-0.5 w-20 h-20"
         // onClick={handleClick}
         onClick={onSquareClick}
       >
@@ -65,27 +65,33 @@ export default function Board() {
 
     return null;
   }
-
   const winner = calculateWinner(square);
   let status;
   if (winner) {
-    status = "Winner: " + winner;
+    status = <p className=" font-medium  ">{winner} Is The Winner</p>;
   } else {
     status = "Next player: " + (isNext ? "X" : "O");
+    status = (
+      <p className="font-medium">{isNext ? "X" : "O"} Is The Next Player</p>
+    );
   }
 
   return (
     <div className="flex justify-center h-screen items-center">
-      <div>{status}</div>
-      <div className="grid grid-cols-3 w-1/3">
-        {buttons.map((index) => (
-          <div key={index}>
-            <Square
-              value={square[index - 1]}
-              onSquareClick={() => handleClick(index - 1)}
-            />
-          </div>
-        ))}
+      <div>
+        <div className="grid grid-cols-3 ">
+          {buttons.map((index) => (
+            <div key={index}>
+              <Square
+                value={square[index - 1]}
+                onSquareClick={() => handleClick(index - 1)}
+              />
+            </div>
+          ))}
+        </div>
+        <div className="flex justify-center my-10">
+          <p>{status}</p>
+        </div>
       </div>
     </div>
   );
