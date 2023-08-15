@@ -1,25 +1,7 @@
 "use client";
 import React from "react";
 import { useState } from "react";
-
-function Square({ value, onSquareClick }: any) {
-  // const [value, setValue] = useState("");
-
-  // function handleClick() {
-  //   setValue("X");
-  // }
-  return (
-    <div>
-      <button
-        className="bg-white rounded-lg text-6xl text-black py-1 px-2 m-0.5 w-20 h-20"
-        // onClick={handleClick}
-        onClick={onSquareClick}
-      >
-        {value}
-      </button>
-    </div>
-  );
-}
+import Square from "./Square";
 
 export default function Board() {
   const [square, setSquare] = useState(Array(9).fill(""));
@@ -32,18 +14,15 @@ export default function Board() {
       return;
     }
 
-    //
     const nextSquare = square.slice();
-    // nextSquare[i] = "X";
+
     isNext ? (nextSquare[i] = "X") : (nextSquare[i] = "O");
     setSquare(nextSquare);
 
     setIsNext(!isNext);
   }
 
-  //calculate a winner
-
-  function calculateWinner(square: any) {
+  function calculateWinner(square: string[]) {
     const lines = [
       [0, 1, 2],
       [3, 4, 5],
@@ -71,9 +50,7 @@ export default function Board() {
     status = <p className=" font-medium  ">{winner} Is The Winner</p>;
   } else {
     status = "Next player: " + (isNext ? "X" : "O");
-    status = (
-      <p className="font-medium">{isNext ? "X" : "O"} Is The Next Player</p>
-    );
+    status = isNext ? "X Is The Next Player" : "O Is The Next Player";
   }
 
   return (
