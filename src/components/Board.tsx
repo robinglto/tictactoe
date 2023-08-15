@@ -56,7 +56,7 @@ export default function Board() {
   return (
     <div className="flex justify-center h-screen items-center">
       <div>
-        <div className="grid grid-cols-3 ">
+        <div className="grid grid-cols-3 bg-white">
           {buttons.map((index) => (
             <div key={index}>
               <Square
